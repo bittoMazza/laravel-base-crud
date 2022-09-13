@@ -4,32 +4,8 @@
 
 @section('main-content')
 <div class="p-5">
-    <table class="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th>Titolo</th>
-            <th>Descrizione</th>
-            <th>immagine</th>
-            <th>Prezzo</th>
-            <th>Serie</th>
-            <th>Data di vendita</th>
-            <th>Categoria</th>
-          </tr>
-        </thead>
-        <tbody>
-            @foreach ($comics as $comic)
-                <tr>
-                    <td>{{ $comic->title }}</td>
-                    <td>{{ $comic->description }}</td>
-                    <td>{{ $comic->thumb }}</td>
-                    <td>{{ $comic->price }}</td>
-                    <td>{{ $comic->series }}</td>
-                    <td>{{ $comic->sale_date }}</td>
-                    <td>{{ $comic->type }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-      </table>
+   <h1 class="text-center p-5 display-2">Benvenuto signor Admin!!</h1>
+   <a href="#">Clicca qui per vedere le cose</a>
 </div>
    
 @endsection
