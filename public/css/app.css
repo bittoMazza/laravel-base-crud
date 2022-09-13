@@ -10855,3 +10855,16 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+header nav {
+  background-color: cadetblue;
+  padding: 20px 15px;
+}
+header nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 10px;
+}
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+}

@@ -20,7 +20,7 @@
         <tbody>
             @foreach ($comics as $comic)
                 <tr>
-                    <td>{{ $comic->title }}</td>
+                    <td><a href="{{ route('comics.show',$comic->id) }}">{{ $comic->title }}</a></td>
                     <td>{{ $comic->description }}</td>
                     <td>{{ $comic->thumb }}</td>
                     <td>{{ $comic->price }}</td>

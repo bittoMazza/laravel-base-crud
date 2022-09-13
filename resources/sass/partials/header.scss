@@ -1,0 +1,17 @@
+header{
+    nav{
+        background-color: cadetblue;
+        padding: 20px 15px;
+    }
+
+    nav ul li{
+        list-style: none;
+        display: inline-block;
+        margin: 0 10px;
+
+        a{
+            color: white;
+            text-decoration: none;
+        }
+    }
+}

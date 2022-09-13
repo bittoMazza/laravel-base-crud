@@ -8,8 +8,10 @@
     <title>Comics | @yield('title')</title>
 </head>
 <body>
+    @include('includes.header')
     <main>
         @yield('main-content')
     </main>
+    @include('includes.footer')
 </body>
 </html>
