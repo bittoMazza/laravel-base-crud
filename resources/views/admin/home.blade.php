@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title','Home')
+@section('title','Welcome Admin')
 
 @section('main-content')
 <div class="p-5">
