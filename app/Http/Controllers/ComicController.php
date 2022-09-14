@@ -48,6 +48,7 @@ class ComicController extends Controller
         $newComic->series = $data['series'];
         $newComic->sale_date = $data['sale_date'];
         $newComic->type = $data['type'];
+        $newComic->slug = rand(10,99999);
 
         $newComic->save();        
         return redirect()->route('comics.index');//Redirect all index
@@ -56,12 +57,12 @@ class ComicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $comic = Comic::findOrFail($id);
+        $comic = Comic::where('slug',$slug)->first();
         return view('comics.show', compact('comic'));
     }
 
