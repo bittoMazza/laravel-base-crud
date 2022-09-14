@@ -10868,3 +10868,7 @@ header nav ul li a {
   color: white;
   text-decoration: none;
 }
+
+label {
+  color: white;
+}
