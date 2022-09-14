@@ -15,6 +15,7 @@
             <th>Serie</th>
             <th>Data di vendita</th>
             <th>Categoria</th>
+            <th>Modifica</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                     <td>{{ $comic->series }}</td>
                     <td>{{ $comic->sale_date }}</td>
                     <td>{{ $comic->type }}</td>
+                    <td><a href="{{ route('comics.edit')}}" class="btn btn-warning">Edit</a></td>
                 </tr>
             @endforeach
         </tbody>
