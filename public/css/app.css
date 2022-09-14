@@ -10868,6 +10868,10 @@ header nav ul li a {
   color: white;
   text-decoration: none;
 }
+header .active {
+  color: blue;
+  font-weight: bold;
+}
 
 label {
   color: white;

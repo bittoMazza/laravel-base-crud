@@ -65,7 +65,8 @@ class ComicController extends Controller
      */
     public function show($slug)
     {
-        $comic = Comic::where('slug',$slug)->first();
+        $comic = Comic::where('slug',$slug)->first(); // Passiamo lo slug con il click sul titolo che a sua volta chiama show(), e ritorniamo il comic in cui lo slug è uguale a quello che abbiamo passato
+        
         return view('comics.show', compact('comic'));
     }
 
