@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 use function GuzzleHttp\Promise\all;
@@ -48,10 +49,12 @@ class ComicController extends Controller
         $newComic->series = $data['series'];
         $newComic->sale_date = $data['sale_date'];
         $newComic->type = $data['type'];
-        $newComic->slug = rand(10,99999);
+        $lastComicId = (Comic::orderBy('id','desc')->first()->id)+1; // Prendiamo l ultimo id della tabella,in modo da aggiungerlo al nostro slug
+
+        $newComic->slug = Str::slug($newComic->title, '-')."-". $lastComicId; //Aggiungiamo al titolo l'id dell ultimo elemento
 
         $newComic->save();        
-        return redirect()->route('comics.index');//Redirect all index
+        return redirect()->route('comics.index');//Redirect to  index
     }
 
     /**
