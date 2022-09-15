@@ -10869,7 +10869,7 @@ header nav ul li a {
   text-decoration: none;
 }
 header .active {
-  color: blue;
+  color: rgb(33, 33, 90);
   font-weight: bold;
 }
 

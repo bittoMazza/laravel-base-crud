@@ -13,5 +13,6 @@
         @yield('main-content')
     </main>
     @include('includes.footer')
+    @yield('delete-script')
 </body>
 </html>

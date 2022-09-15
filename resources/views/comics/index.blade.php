@@ -45,7 +45,7 @@
                     <td>
                       <div class="d-flex">
                         <a href="{{ route('comics.edit',$comic->slug) }}" class="btn btn-warning me-2">Edit</a>
-                        <form action="{{ route('comics.destroy',$comic->id) }}" method="POST">
+                        <form action="{{ route('comics.destroy',$comic->id) }}" method="POST" class="delete-comic-form">
                           @csrf
                           @method('DELETE')
 
@@ -61,3 +61,18 @@
    
 @endsection
 
+@section('delete-script')
+  <script>
+
+    // Prendiamo tutti gli elementi con questa classe,ovvero i bottoni delete
+    const deleteFormElement = document.querySelectorAll('.delete-comic-form');
+
+    deleteFormElement.forEach(formButton=>{
+      formButton.addEventListener('submit', function(event){
+        event.preventDefault();
+        const result = window.confirm('Sei sicuro di voler eliminare l\'elemento?');
+        if(result) this.submit();
+      })
+    })
+  </script>
+@endsection
