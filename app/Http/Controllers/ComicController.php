@@ -101,7 +101,7 @@ class ComicController extends Controller
 
         $comic->update($curr_comic); // Facciamo il fill di comic con i dati di curr_comic
 
-        return redirect()->route('comics.index');//Redirect to  index
+        return redirect()->route('comics.index')->with('update',$comic->title); 
     }
 
     /**
@@ -114,6 +114,6 @@ class ComicController extends Controller
     {
         $comic = Comic::findOrFail($id);
         $comic->delete();
-        return redirect()->route('comics.index');//Redirect to  index
+        return redirect()->route('comics.index')->with('delete',$comic->title);
     }
 }

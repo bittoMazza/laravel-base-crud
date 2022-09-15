@@ -3,9 +3,17 @@
 @section('title','Index')
 
 @section('main-content')
-@if ( session())
-  
-@endif()
+@if ( session('delete'))
+  <div class="alert alert-warning m-3">
+    {{ session('delete') }} è stato rimosso con successo
+  </div>
+@endif
+
+@if ( session('update'))
+  <div class="alert alert-success m-3">
+    {{ session('update') }} è stato modificato con successo
+  </div>
+@endif
 <div>
 
 </div>
