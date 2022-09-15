@@ -3,6 +3,12 @@
 @section('title','Index')
 
 @section('main-content')
+@if ( session())
+  
+@endif()
+<div>
+
+</div>
 <div class="p-5">
     <h2 class="p-3 text-center">Tutti i comics</h2>
     <table class="table table-striped table-dark">
@@ -28,7 +34,17 @@
                     <td>{{ $comic->series }}</td>
                     <td>{{ $comic->sale_date }}</td>
                     <td>{{ $comic->type }}</td>
-                    <td><a href="{{ route('comics.edit',$comic->slug) }}" class="btn btn-warning">Edit</a></td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="{{ route('comics.edit',$comic->slug) }}" class="btn btn-warning me-2">Edit</a>
+                        <form action="{{ route('comics.destroy',$comic->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+
+                          <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                      </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -36,3 +52,4 @@
 </div>
    
 @endsection
+

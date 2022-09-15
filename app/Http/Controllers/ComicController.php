@@ -39,21 +39,22 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all(); // Prendiamo il contenuto di request(ovvvero i nostri dati passati in post) e li diamo ad una variabile data
+
+        // Prendiamo il contenuto di request(ovvvero i nostri dati passati in post) e li diamo ad una variabile data
+
+        $data = $request->all(); 
+
+        // Prendiamo l ultimo id della tabella,in modo da aggiungerlo al nostro slug
+
+        $lastComicId = (Comic::orderBy('id','desc')->first()->id)+1; 
+
+        //Aggiungiamo al titolo l'id dell ultimo elemento 
+
+        $data['slug'] = Str::slug($data['title'], '-')."-". $lastComicId; 
 
         $newComic = new Comic();
-        $newComic->title = $data['title'];
-        $newComic->description = $data['description'];
-        $newComic->thumb = $data['thumb'];
-        $newComic->price = $data['price'];
-        $newComic->series = $data['series'];
-        $newComic->sale_date = $data['sale_date'];
-        $newComic->type = $data['type'];
-        $lastComicId = (Comic::orderBy('id','desc')->first()->id)+1; // Prendiamo l ultimo id della tabella,in modo da aggiungerlo al nostro slug
 
-        $newComic->slug = Str::slug($newComic->title, '-')."-". $lastComicId; //Aggiungiamo al titolo l'id dell ultimo elemento
-
-        $newComic->save();        
+        $newComic->create($data);  
         return redirect()->route('comics.index');//Redirect to  index
     }
 
@@ -65,14 +66,16 @@ class ComicController extends Controller
      */
     public function show($slug)
     {
+
+         // Passiamo lo slug con il click sul titolo che a sua volta chiama show(), e ritorniamo il comic in cui lo slug è uguale a quello che abbiamo passato
+
         $comic = Comic::where('slug',$slug)->first(); 
-        // Passiamo lo slug con il click sul titolo che a sua volta chiama show(), e ritorniamo il comic in cui lo slug è uguale a quello che abbiamo passato
-        
+       
         return view('comics.show', compact('comic'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Il click che chiama l edit passa lo slug,controlliamo a quale riga corrisponde e la ritorniamo alla view
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -109,6 +112,8 @@ class ComicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+        $comic->delete();
+        return redirect()->route('comics.index');//Redirect to  index
     }
 }
