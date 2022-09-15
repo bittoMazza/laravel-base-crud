@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title',$comic->title)
 
 @section('main-content')
     <div class="container text-center mt-3">

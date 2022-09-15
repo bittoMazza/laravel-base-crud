@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title','Home')
+@section('title','Index')
 
 @section('main-content')
 <div class="p-5">
@@ -28,7 +28,7 @@
                     <td>{{ $comic->series }}</td>
                     <td>{{ $comic->sale_date }}</td>
                     <td>{{ $comic->type }}</td>
-                    <td><a href="{{ route('comics.edit')}}" class="btn btn-warning">Edit</a></td>
+                    <td><a href="{{ route('comics.edit',$comic->slug) }}" class="btn btn-warning">Edit</a></td>
                 </tr>
             @endforeach
         </tbody>

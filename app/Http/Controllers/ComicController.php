@@ -60,12 +60,13 @@ class ComicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $slug
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
     {
-        $comic = Comic::where('slug',$slug)->first(); // Passiamo lo slug con il click sul titolo che a sua volta chiama show(), e ritorniamo il comic in cui lo slug è uguale a quello che abbiamo passato
+        $comic = Comic::where('slug',$slug)->first(); 
+        // Passiamo lo slug con il click sul titolo che a sua volta chiama show(), e ritorniamo il comic in cui lo slug è uguale a quello che abbiamo passato
         
         return view('comics.show', compact('comic'));
     }
@@ -76,9 +77,10 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $comic = Comic::where('slug',$slug)->first();
+        return view('comics.edit',compact('comic'));
     }
 
     /**
@@ -90,7 +92,13 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $curr_comic = $request->all();
+        $curr_comic['slug'] = Str::slug($curr_comic['title'], '-')."-".$id;
+        $comic = Comic::findOrFail($id);
+
+        $comic->update($curr_comic); // Facciamo il fill di comic con i dati di curr_comic
+
+        return redirect()->route('comics.index');//Redirect to  index
     }
 
     /**
