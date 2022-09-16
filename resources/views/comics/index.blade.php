@@ -14,9 +14,7 @@
     {{ session('update') }} è stato modificato con successo
   </div>
 @endif
-<div>
 
-</div>
 <div class="p-5">
     <h2 class="p-3 text-center">Tutti i comics</h2>
     <table class="table table-striped table-dark">

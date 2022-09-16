@@ -10,6 +10,7 @@ use function GuzzleHttp\Promise\all;
 
 class ComicController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -43,6 +44,17 @@ class ComicController extends Controller
         // Prendiamo il contenuto di request(ovvvero i nostri dati passati in post) e li diamo ad una variabile data
 
         $data = $request->all(); 
+
+        $validatedData = $request->validate([
+            
+            'title' => 'required|min:5|max:255',
+            'description' => 'required|min:3',
+            'thumb' => 'required|url',
+            'price' => 'required|numeric',
+            'series' => 'required|min:5|max:255',
+            'sale_date' => 'required|date|after:1895/01/01',
+            'type' => 'required|min:5|max:30',       
+        ]);
 
         // Prendiamo l ultimo id della tabella,in modo da aggiungerlo al nostro slug
 

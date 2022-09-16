@@ -2,6 +2,17 @@
 
 @section('main-content')
 <h2 class="text-center mt-2">Form per inserimento nuovo fumetto</h2>
+@if ($errors->any())
+<div class="alert alert-warning text-center">
+    <ul>
+        @foreach ($errors->all() as $error )
+        <li>
+            {{ $error }}
+        </li>    
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="col-4 mx-auto p-3 mt-3 mb-2 bg-dark">
     <form action="{{ route('comics.store') }}" method="POST">
         @csrf
