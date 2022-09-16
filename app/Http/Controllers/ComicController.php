@@ -11,6 +11,20 @@ use function GuzzleHttp\Promise\all;
 class ComicController extends Controller
 {
 
+    protected $validationRules = [
+                    
+        'title' => 'required|min:5|max:255',
+        'description' => 'required|min:3',
+        'thumb' => 'required|url',
+        'price' => 'required|numeric|between:1,99',
+        'series' => 'required|min:5|max:255',
+        'sale_date' => 'required|date|after:1895/01/01',
+        'type' => 'required|min:5|max:30',       
+    ];
+
+    protected $customMessage = [
+        'title.min' => 'METTICI ALMENO 5 CARATTERI DAII!!',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +43,8 @@ class ComicController extends Controller
      */
     public function create()
     {
-        return view('comics.create');
+        $comic = new Comic();
+        return view('comics.create', compact('comic')) ;
     }
 
     /**
@@ -45,16 +60,7 @@ class ComicController extends Controller
 
         $data = $request->all(); 
 
-        $validatedData = $request->validate([
-            
-            'title' => 'required|min:5|max:255',
-            'description' => 'required|min:3',
-            'thumb' => 'required|url',
-            'price' => 'required|numeric',
-            'series' => 'required|min:5|max:255',
-            'sale_date' => 'required|date|after:1895/01/01',
-            'type' => 'required|min:5|max:30',       
-        ]);
+        $validatedData = $request->validate($this->validationRules,$this->customMessage) ;
 
         // Prendiamo l ultimo id della tabella,in modo da aggiungerlo al nostro slug
 
@@ -108,6 +114,9 @@ class ComicController extends Controller
     public function update(Request $request, $id)
     {
         $curr_comic = $request->all();
+
+        $validatedData = $request->validate($this->validationRules,$this->customMessage) ;
+
         $curr_comic['slug'] = Str::slug($curr_comic['title'], '-')."-".$id;
         $comic = Comic::findOrFail($id);
 
